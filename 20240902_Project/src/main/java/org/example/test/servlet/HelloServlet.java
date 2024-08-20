@@ -1,4 +1,4 @@
-package org.example.test;
+package org.example.test.servlet;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
