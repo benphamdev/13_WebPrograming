@@ -5,9 +5,23 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-    <h1><%= "Hello World!" %>
+    <%! String message = "Index page";%>
+
+    <h1><%= message %>
     </h1>
-    <br/>
-    <a href="hello-servlet">Hello Servlet</a>
+
+    <%--    <form action="auth/login" method="GET">--%>
+    <%--        Tên: <label>--%>
+    <%--        <input name="firstName" type="text">--%>
+    <%--    </label>--%>
+    <%--        <br/>--%>
+    <%--        Họ lót: <label>--%>
+    <%--        <input name="lastName" type="text"/>--%>
+    <%--    </label>--%>
+    <%--        <input type="submit" value="Submit"/>--%>
+    <%--    </form>--%>
+
+    <%--    <br/>--%>
+    <a href="auth/login">Login</a>
 </body>
 </html>
