@@ -1,8 +1,9 @@
 package org.example.com.controllers;
 
-import java.io.*;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+
+import java.io.IOException;
 
 @WebServlet(name = "loginServlet", value = "/auth/login")
 public class LoginServlet extends HttpServlet {
@@ -12,7 +13,7 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println("Username: " + username);
         // Assume checking username and password from database
-        if ("user".equals(username) && "password".equals(password)) {
+        if ("username".equals(username) && "password".equals(password)) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
 
@@ -20,7 +21,7 @@ public class LoginServlet extends HttpServlet {
             userCookie.setMaxAge(60 * 60); // 1 hour
             response.addCookie(userCookie);
 
-            response.sendRedirect("success.jsp");
+            response.sendRedirect("/common/success.jsp");
             System.out.println("1: " + username);
         } else {
             response.sendRedirect("login.jsp?error=1");
@@ -30,6 +31,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect(request.getContextPath() + "/auth/login.jsp");
     }
 }
