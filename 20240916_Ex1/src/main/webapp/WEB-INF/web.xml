@@ -14,7 +14,7 @@
 
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>org.example.com.controllers.LoginServlet</servlet-class>
+        <servlet-class>org.example.com.controllers.LoginController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>registerServlet</servlet-name>
-        <servlet-class>org.example.com.controllers.RegisterServlet</servlet-class>
+        <servlet-class>org.example.com.controllers.RegisterController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>registerServlet</servlet-name>
@@ -32,7 +32,7 @@
 
     <servlet>
         <servlet-name>forgotPasswordServlet</servlet-name>
-        <servlet-class>org.example.com.controllers.ForgotPasswordServlet</servlet-class>
+        <servlet-class>org.example.com.controllers.ForgotPasswordController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>forgotPasswordServlet</servlet-name>
@@ -41,7 +41,7 @@
 
     <servlet>
         <servlet-name>logoutServlet</servlet-name>
-        <servlet-class>org.example.com.controllers.LogoutServlet</servlet-class>
+        <servlet-class>org.example.com.controllers.LogoutController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
