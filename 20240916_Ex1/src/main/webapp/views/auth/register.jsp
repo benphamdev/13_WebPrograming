@@ -16,45 +16,62 @@
         <form action="register" method="POST">
             <label for="username">
             </label>
-            <input type="text"
-                   id="username"
-                   name="username"
-                   placeholder="username" required>
+            <input
+                    class="input-custom"
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="username" required>
 
             <label for="fullName">
             </label>
-            <input type="text"
-                   id="fullName"
-                   name="fullName"
-                   placeholder="full name" required>
+            <input
+                    class="input-custom"
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="full name" required>
 
             <label for="email">
             </label>
-            <input type="text"
-                   id="email"
-                   name="email"
-                   placeholder="email" required>
+            <input
+                    class="input-custom"
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="email" required>
 
             <label for="phone">
             </label>
-            <input type="text"
-                   id="phone"
-                   name="phone"
-                   placeholder="phone number" required>
+            <input
+                    class="input-custom"
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    placeholder="phone number" required>
 
             <label for="password">
             </label>
-            <input type="password"
+            <input class="input-custom"
+                   type="password"
                    id="password"
                    name="password"
                    placeholder="password" required>
 
             <label for="re-password">
             </label>
-            <input type="password"
+            <input class="input-custom"
+                   type="password"
                    id="re-password"
                    name="re-password"
                    placeholder="Re-enter your password" required>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to all statements in
+                    <a href="terms-of-service.html">Terms of Service</a>
+                </label>
+            </div>
 
             <div class="wrap">
                 <button type="submit"
@@ -72,7 +89,7 @@
             %>
         </h5>
         <p>Already have an account?
-            <a href="login" class="login">
+            <a href="login">
                 Log in
             </a>
         </p>

@@ -33,19 +33,19 @@
         <form action="login" method="POST">
             <label for="username">
             </label>
-            <input class="input-a" type="text"
+            <input class="input-custom" type="text"
                    id="username"
                    name="username"
                    placeholder="Email address or username" required>
 
             <label for="password">
             </label>
-            <input class="input-a" type="password"
+            <input class="input-custom" type="password"
                    id="password"
                    name="password"
                    placeholder="Password" required>
 
-            <div class="remember-me">
+            <div class="checkbox-group">
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Remember me</label>
             </div>

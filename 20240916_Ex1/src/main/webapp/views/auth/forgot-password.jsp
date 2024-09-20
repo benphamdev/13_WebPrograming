@@ -17,26 +17,27 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/views/auth/forgot-password.css">
 </head>
 <body>
-    <div class="main">
+    <div class=" main
+    ">
         <h1>Forgotten password</h1>
         <form action="forgot-password" method="POST">
             <label for="email">
             </label>
-            <input class="input-a" type="text"
+            <input class="input-custom" type="text"
                    id="email"
                    name="email"
                    placeholder="Email" required>
 
             <label for="password">
             </label>
-            <input class="input-a" type="password"
+            <input class="input-custom" type="password"
                    id="password"
                    name="password"
                    placeholder="Password" required>
 
             <label for="password">
             </label>
-            <input class="input-a" type="password"
+            <input class="input-custom" type="password"
                    id="re-password"
                    name="re-password"
                    placeholder="Re-enter password" required>

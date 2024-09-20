@@ -1,3 +1,6 @@
+@import "../main.css";
+
+/* Keyframes Animations */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -7,19 +10,6 @@
     }
 }
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.5;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f3f3f3, #e2e2e2);
-    flex-direction: column;
-    margin: 0;
-    animation: fadeIn 1s ease-in-out;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -27,17 +17,6 @@ body {
     to {
         opacity: 1;
     }
-}
-
-.main {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    padding: 20px 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 500px;
-    text-align: center;
-    animation: slideIn 0.5s ease-in-out;
 }
 
 @keyframes slideIn {
@@ -51,13 +30,6 @@ body {
     }
 }
 
-h1 {
-    color: #FF6347; /* Tomato */
-    font-family: 'Century Gothic', ui-monospace;
-    margin-bottom: 20px;
-    animation: textFadeIn 1s ease-in-out;
-}
-
 @keyframes textFadeIn {
     from {
         opacity: 0;
@@ -65,34 +37,6 @@ h1 {
     to {
         opacity: 1;
     }
-}
-
-label {
-    display: block;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-align: left;
-    color: #555;
-    font-weight: bold;
-    animation: textFadeIn 1s ease-in-out;
-}
-
-.input-a {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-    animation: inputFadeIn 1s ease-in-out;
-}
-
-.input-a:focus {
-    border-color: #FF6347; /* Tomato */
-    outline: none;
 }
 
 @keyframes inputFadeIn {
@@ -104,43 +48,6 @@ label {
     }
 }
 
-button {
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    background: linear-gradient(270deg, #FF6347, #CD5C5C); /* Tomato to Indian Red */
-    background-size: 200% 200%;
-    width: 100%;
-    font-size: 16px;
-    transition: background-position 0.3s ease, box-shadow 0.3s ease;
-    animation: buttonFadeIn 1s ease-in-out, gradientAnimation 3s ease infinite;
-}
-
-button:hover {
-    background-position: 100% 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-@keyframes buttonFadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: wrapFadeIn 1s ease-in-out;
-}
-
 @keyframes wrapFadeIn {
     from {
         opacity: 0;
@@ -150,38 +57,55 @@ button:hover {
     }
 }
 
-.remember-me {
+/* Global Styles */
+body {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    animation: rememberMeFadeIn 1s ease-in-out;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    background: linear-gradient(135deg, #f3f3f3, #e2e2e2);
+    animation: fadeIn 1s ease-in-out;
 }
 
-@keyframes rememberMeFadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* Main Container */
+.main {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    width: 500px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideIn 0.5s ease-in-out;
 }
 
-.remember-me label {
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.remember-me input {
-    margin-right: 10px;
-}
-
-a {
-    text-decoration: none;
+/* Headings */
+h1 {
     color: #FF6347; /* Tomato */
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    font-family: 'Century Gothic', ui-monospace;
+    margin-bottom: 20px;
+    animation: textFadeIn 1s ease-in-out;
 }
 
-a:hover {
-    color: #CD5C5C; /* Indian Red */
-    text-decoration: underline;
+/* Labels */
+label {
+    display: block;
+    width: 100%;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #555;
+    font-weight: bold;
+    animation: textFadeIn 1s ease-in-out;
+}
+
+/* Wrapper */
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: wrapFadeIn 1s ease-in-out;
 }

@@ -1,3 +1,5 @@
+@import "../main.css";
+
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -7,18 +9,6 @@
     }
 }
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: sans-serif;
-    line-height: 1.5;
-    min-height: 100vh;
-    background: #f3f3f3;
-    flex-direction: column;
-    margin: 0;
-    animation: fadeIn 1s ease-in-out;
-}
 
 @keyframes fadeIn {
     from {
@@ -65,45 +55,6 @@ label {
     font-weight: bold;
 }
 
-input {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-button {
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    background: linear-gradient(270deg, #FF6347, #CD5C5C); /* Tomato to Indian Red */
-    background-size: 200% 200%;
-    width: 100%;
-    font-size: 16px;
-    transition: background-position 0.3s ease, box-shadow 0.3s ease;
-    animation: buttonFadeIn 1s ease-in-out;
-}
-
-button:hover {
-    background-position: 100% 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-@keyframes buttonFadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 
 .wrap {
     display: flex;
@@ -111,12 +62,3 @@ button:hover {
     align-items: center;
 }
 
-.login {
-    text-decoration: none;
-    color: #FF6347; /* Tomato */
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-}
-
-.login:hover {
-    text-decoration: underline;
-}
