@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DBConnect {
-    static String URL = "jdbc:mysql://localhost:8012/web_program";
+    static String URL = "jdbc:mysql://localhost:3307/web_program";
     static String USER = "root";
     static String PASSWORD = "123456789";
     static String DRIVER = "com.mysql.cj.jdbc.Driver";
