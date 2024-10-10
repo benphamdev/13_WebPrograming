@@ -27,6 +27,9 @@
             <c:if test="${category.image.length() >= 5 && !category.image.substring(0, 5).equals('https')}">
                 <c:url value="/image?filename=${category.image}" var="imgUrl"></c:url>
             </c:if>
+            <c:if test="${category.image.length() < 5 || category.image.substring(0, 5).equals('https')}">
+                <c:set var="imgUrl" value="${category.image}"/>
+            </c:if>
             <img height="150" width="200" src="${imgUrl}"/>
         </div>
         <div>

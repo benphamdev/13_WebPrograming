@@ -3,8 +3,8 @@ package org.example.com.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "videos")
@@ -15,8 +15,11 @@ import java.util.UUID;
 @Setter
 @NamedQuery(name = "Video.findAll", query = "SELECT v FROM Video v")
 public class Video implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "VideoId")
     private String videoId;
     @Column(name = "Active")
@@ -30,13 +33,7 @@ public class Video implements Serializable {
     @Column(name = "Views")
     private int views;
 
-    //bi-directional many-to-one association to Category
     @ManyToOne
     @JoinColumn(name = "CategoryId")
     private Category category;
-
-    @PrePersist
-    public void prePersist() {
-        this.videoId = "video-" + UUID.randomUUID().toString().replace("-", "");
-    }
 }

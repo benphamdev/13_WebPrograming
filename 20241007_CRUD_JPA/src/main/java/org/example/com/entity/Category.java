@@ -28,7 +28,7 @@ public class Category implements Serializable {
     @NotEmpty(message = "Null is not allowed!")
     private String categoryName;
 
-    @Column(name = "Image", length = 50, nullable = true)
+    @Column(name = "Image")
     private String image;
 
     @Column(name = "Status")

@@ -18,10 +18,13 @@ import java.util.List;
 
 @MultipartConfig()
 @WebServlet(
-        urlPatterns = {"/admin/categories",
+        urlPatterns = {
+                "/admin/categories",
                 "/admin/category/add",
                 "/admin/category/edit",
-                "/admin/category/insert", "/admin/category/delete"}
+                "/admin/category/insert",
+                "/admin/category/delete"
+        }
 )
 public class CategoryController extends HttpServlet {
     private final ICategoryService categoryService = new CategoryServiceImpl();
@@ -44,7 +47,6 @@ public class CategoryController extends HttpServlet {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-//            req.getRequestDispatcher("/views/admin/category-list.jsp").forward(req, resp);
             resp.sendRedirect(req.getContextPath() + "/admin/categories");
         } else if (url.contains("/admin/category/edit")) {
             int id = Integer.parseInt(req.getParameter("id"));
@@ -60,89 +62,64 @@ public class CategoryController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String url = req.getRequestURI();
         if (url.contains("/admin/category/insert")) {
-            // Get data from view
-            String categoryName = req.getParameter("categoryName");
-            System.out.println(req.getParameter("status"));
-            int status = Integer.parseInt(req.getParameter("status"));
-            String imageLink = req.getParameter("imageLink");
-
-            Category categoryModel = Category.builder()
-                                             .categoryName(categoryName)
-                                             .status(status)
-                                             .build();
-
-            // Handle upload file
-            String fname = "";
-            String uploadPath = req.getServletContext().getRealPath("/uploads");
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists())
-                uploadDir.mkdir();
-            try {
-                Part part = req.getPart("image");
-                if (part.getSize() > 0) {
-                    String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    int index = fileName.lastIndexOf(".");
-                    String ext = fileName.substring(index + 1);
-                    fname = System.currentTimeMillis() + "." + ext;
-                    // upload
-                    part.write(uploadPath + "/" + fname);
-                    categoryModel.setImage(fname);
-                } else if (imageLink != null) {
-                    categoryModel.setImage(imageLink);
-                } else {
-                    categoryModel.setImage("avatar.png");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // Service
-            categoryService.insert(categoryModel);
-            //
-            resp.sendRedirect(req.getContextPath() + "/admin/categories");
+            handleCategoryInsertOrUpdate(req, resp, false);
         } else if (url.contains("/admin/category/edit")) {
-            // Get data from view
+            handleCategoryInsertOrUpdate(req, resp, true);
+        }
+    }
+
+    private void handleCategoryInsertOrUpdate(
+            HttpServletRequest req, HttpServletResponse resp, boolean isUpdate
+    ) throws IOException, ServletException {
+        String categoryName = req.getParameter("categoryName");
+        int status = Integer.parseInt(req.getParameter("status"));
+        String imageLink = req.getParameter("imageLink");
+
+        Category.CategoryBuilder categoryBuilder = Category.builder()
+                                                           .categoryName(categoryName)
+                                                           .status(status);
+
+        if (isUpdate) {
             int categoryId = Integer.parseInt(req.getParameter("categoryId"));
-            String categoryName = req.getParameter("categoryName");
-            System.out.println(req.getParameter("status"));
-            int status = Integer.parseInt(req.getParameter("status"));
-            String imageLink = req.getParameter("imageLink");
+            categoryBuilder.categoryId(categoryId);
+            Category existingCategory = categoryService.findById(categoryId);
+            categoryBuilder.image(existingCategory.getImage());
+        }
 
-            Category categoryModel = Category.builder()
-                                             .categoryId(categoryId)
-                                             .categoryName(categoryName)
-                                             .status(status)
-                                             .build();
+        Category categoryModel = categoryBuilder.build();
+        handleFileUpload(req, categoryModel, imageLink);
 
-            // Handle upload file
-            String fname = "";
-            String uploadPath = req.getServletContext().getRealPath("/uploads");
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists())
-                uploadDir.mkdir();
-            try {
-                Part part = req.getPart("image");
-                if (part.getSize() > 0) {
-                    String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    int index = fileName.lastIndexOf(".");
-                    String ext = fileName.substring(index + 1);
-                    fname = System.currentTimeMillis() + "." + ext;
-                    // upload
-                    part.write(uploadPath + "/" + fname);
-                    categoryModel.setImage(fname);
-                } else if (imageLink != null) {
-                    categoryModel.setImage(imageLink);
-                } else {
-                    categoryModel.setImage("avatar.png");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // Service
+        if (isUpdate) {
             categoryService.update(categoryModel);
-            //
-            resp.sendRedirect(req.getContextPath() + "/admin/categories");
+        } else {
+            categoryService.insert(categoryModel);
+        }
+
+        resp.sendRedirect(req.getContextPath() + "/admin/categories");
+    }
+
+    private void handleFileUpload(
+            HttpServletRequest req, Category categoryModel, String imageLink
+    ) throws IOException, ServletException {
+        String uploadPath = req.getServletContext().getRealPath("/uploads");
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+
+        try {
+            Part part = req.getPart("image");
+            if (part.getSize() > 0) {
+                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+                String fname = System.currentTimeMillis() + "." + ext;
+                part.write(uploadPath + "/" + fname);
+                categoryModel.setImage(fname);
+            } else if (imageLink != null && !imageLink.isEmpty()) {
+                categoryModel.setImage(imageLink);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
