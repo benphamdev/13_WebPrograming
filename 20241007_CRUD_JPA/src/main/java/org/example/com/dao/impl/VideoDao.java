@@ -48,7 +48,7 @@ public class VideoDao implements IVideoDao {
     }
 
     @Override
-    public void delete(int videoId) throws Exception {
+    public void delete(String videoId) throws Exception {
         EntityManager enma = JPAConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
         try {
