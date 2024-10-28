@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html layout:decorate="~{admin/Layout-admin.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${category.isEdit} ? 'Edit Category' : 'Add New Category'"></title>
+</head>
+<body>
+    <section class="row" layout:fragment="content">
+        <div class="col-6 offset-3 mt-4">
+            <form method="POST" th:action="@{/admin/categories/saveOrUpdate}" th:object="${category}">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 th:text="${category.isEdit} ? 'Edit Category' : 'Add New Category'">Add New Category</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3" th:if="${category.isEdit}">
+                            <label class="form-label" for="categoryId">Category ID:</label>
+                            <input th:field="*{isEdit}" type="hidden">
+                            <input class="form-control" id="categoryId" name="categoryId" placeholder="Category Id"
+                                   readonly
+                                   th:field="*{categoryId}" type="text">
+                            <div class="form-text text-muted" th:if="${#fields.hasErrors('categoryId')}">
+                                <span class="text-danger">Category ID is required!</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="name">Category Name:</label>
+                            <input class="form-control" id="name" name="name" placeholder="Category Name" required
+                                   th:field="*{name}" type="text">
+                            <div class="form-text text-muted" th:if="${#fields.hasErrors('name')}">
+                                <span class="text-danger">Category Name is required!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <a class="btn btn-secondary" th:href="@{/admin/categories/list}">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

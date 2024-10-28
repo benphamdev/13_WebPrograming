@@ -1,14 +1,14 @@
 package org.example.com;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-@WebServlet(name = "helloServlet", value = "/index")
+@WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
     private String message;
 
@@ -16,15 +16,14 @@ public class HelloServlet extends HttpServlet {
         message = "Hello World!";
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-        response.setContentType("text/html");
-        try {
-            request.getRequestDispatcher("index.html").forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
-            throw new ServletException("Error forwarding to index.html", e);
-        }
+
+        // Hello
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>" + message + "</h1>");
+        out.println("</body></html>");
     }
 
     public void destroy() {
