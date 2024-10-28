@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Header</title>
 </head>
 <body>
     <header>
         <h1>Admin Header</h1>
+        <!-- Hiển thị hình ảnh của bạn -->
+        <img alt="My Photo" style="width: 100px; height: auto;" th:src="@{/images/my_photo.jpg}"/>
+
         <nav>
             <ul>
                 <li><a th:href="@{/admin/categories}">Categories</a></li>

@@ -72,7 +72,7 @@ public class CategoryController {
             BeanUtils.copyProperties(entity, categoryModel);
             categoryModel.setEdit(true);
             model.addAttribute("category", categoryModel);
-            return new ModelAndView("admin/categories/addOrEdit", model);
+            return new ModelAndView("admin/categories/add-edit-category", model);
         }
 
         model.addAttribute("message", "Category does not exist!");
@@ -95,7 +95,7 @@ public class CategoryController {
             list = categoryService.findAll();
         }
         model.addAttribute("categories", list);
-        return "admin/categories/search";
+        return "admin/categories/search-add-category";
     }
 
     @RequestMapping("searchpaginated")
