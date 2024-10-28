@@ -22,14 +22,4 @@ public class CategoryModel {
     private Set<ProductModel> products;
 
     private boolean isEdit;
-
-    // Getters and Setters
-
-    public boolean isEdit() {
-        return isEdit;
-    }
-
-    public void setEdit(boolean edit) {
-        isEdit = edit;
-    }
 }
