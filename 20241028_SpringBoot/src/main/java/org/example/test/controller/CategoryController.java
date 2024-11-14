@@ -1,8 +1,8 @@
 package org.example.test.controller;
 
 import jakarta.validation.Valid;
+import org.example.test.dto.request.CategoryRequest;
 import org.example.test.entity.CategoryEntity;
-import org.example.test.model.CategoryModel;
 import org.example.test.service.impl.CategoryServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,8 @@ public class CategoryController {
     @PostMapping("saveOrUpdate")
     public ModelAndView saveOrUpdate(
             ModelMap model,
-            @Valid @ModelAttribute("category") CategoryModel categoryModel,
+            @Valid
+            @ModelAttribute("category") CategoryRequest categoryRequest,
             BindingResult result
     ) {
         if (result.hasErrors()) {
@@ -40,10 +41,10 @@ public class CategoryController {
         }
 
         CategoryEntity entity = new CategoryEntity();
-        BeanUtils.copyProperties(categoryModel, entity);
+        BeanUtils.copyProperties(categoryRequest, entity);
         categoryService.save(entity);
 
-        String message = categoryModel.isEdit() ? "Category is Edited!" : "Category is saved!";
+        String message = categoryRequest.isEdit() ? "Category is Edited!" : "Category is saved!";
         model.addAttribute("message", message);
 
         return new ModelAndView("forward:/admin/categories/searchpaginated", model);
@@ -51,7 +52,7 @@ public class CategoryController {
 
     @GetMapping("/add")
     public String addCategory(ModelMap model) {
-        model.addAttribute("category", new CategoryModel());
+        model.addAttribute("category", new CategoryRequest());
         return "admin/categories/add-edit-category";
     }
 
@@ -65,13 +66,13 @@ public class CategoryController {
     @GetMapping("edit/{categoryId}")
     public ModelAndView edit(ModelMap model, @PathVariable("categoryId") Long categoryId) {
         Optional<CategoryEntity> optCategory = categoryService.findById(categoryId);
-        CategoryModel categoryModel = new CategoryModel();
+        CategoryRequest categoryRequest = new CategoryRequest();
 
         if (optCategory.isPresent()) {
             CategoryEntity entity = optCategory.get();
-            BeanUtils.copyProperties(entity, categoryModel);
-            categoryModel.setEdit(true);
-            model.addAttribute("category", categoryModel);
+            BeanUtils.copyProperties(entity, categoryRequest);
+            categoryRequest.setEdit(true);
+            model.addAttribute("category", categoryRequest);
             return new ModelAndView("admin/categories/add-edit-category", model);
         }
 

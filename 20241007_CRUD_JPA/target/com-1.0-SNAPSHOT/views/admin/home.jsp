@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../../commons/taglib.jsp" %>
+<%@ include file="/commons/taglib.jsp" %>
 <html>
 <head>
     <title>Administrator's Home Page</title>
@@ -53,5 +53,6 @@
                 </ul>
             </div>
         </c:otherwise></c:choose>
+
 </body>
 </html>
