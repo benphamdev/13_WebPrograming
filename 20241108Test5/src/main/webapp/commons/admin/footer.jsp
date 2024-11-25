@@ -8,7 +8,7 @@
         <div>
             <p class="mb-0"><strong>Full Name:</strong> Phạm Duy Chiến</p>
             <p class="mb-0"><strong>Student ID:</strong> 22162006</p>
-            <p class="mb-0"><strong>Subject Code:</strong> 1</p>
+            <p class="mb-0"><strong>Subject Code:</strong> 13.3</p>
         </div>
 
         <!-- Social Media Links and Copyright -->

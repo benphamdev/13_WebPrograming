@@ -3,6 +3,8 @@ package org.com.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -31,6 +33,14 @@ public class Product {
 
     private Integer amount;
 
+    private int nVisit; // Lượt xem
+
+    private int nSold;  // Số lượng đã bán
+
+    private boolean active;
+
+    private int availableQuantity; // Số lượng còn lại
+
     @ManyToOne
     @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
@@ -38,4 +48,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "sellerId", nullable = false)
     private User seller;
+
+    @OneToMany(mappedBy = "product")
+    private List<Comment> comments;
 }

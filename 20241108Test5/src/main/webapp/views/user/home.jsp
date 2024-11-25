@@ -49,6 +49,30 @@
                         <a href="${pageContext.request.contextPath }/logout">Logout</a>
                     </li>
                 </ul>
+
+
+                <h1>Top 10 Best Sellers</h1>
+                <ul>
+                    <c:forEach items="${topSellers}" var="product">
+                        <li>${product.name} - Sold: ${product.nSold}</li>
+                    </c:forEach>
+                </ul>
+
+                <h1>Top 10 Most Viewed</h1>
+                <ul>
+                    <c:forEach items="${mostViewed}" var="product">
+                        <li>${product.name} - Views: ${product.nVisit}</li>
+                    </c:forEach>
+                </ul>
+
+                <h1>Top 10 Most Liked</h1>
+                <ul>
+                    <c:forEach items="${mostLiked}" var="product">
+                        <li>${product.name} - Likes:
+                            <c:out value="${product.comments.size()}"/>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
         </c:otherwise></c:choose>
 </body>

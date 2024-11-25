@@ -5,8 +5,8 @@
   Time: 13:25
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+
+<%@ include file="/commons/taglib.jsp" %>
 
 <!-- BEGIN PRE-FOOTER -->
 <div class="pre-footer">

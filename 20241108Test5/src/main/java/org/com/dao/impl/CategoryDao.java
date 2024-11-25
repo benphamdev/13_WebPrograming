@@ -67,7 +67,22 @@ public class CategoryDao extends AbstractDAO<Category, Integer> implements ICate
 
     @Override
     public void delete(int cateid) throws Exception {
-
+        EntityManager em = JPAConfig.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Category category = em.find(Category.class, Integer.valueOf(cateid));
+            if (category != null) {
+                em.remove(category);
+            } else {
+                throw new Exception("Category not found");
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -119,7 +134,7 @@ public class CategoryDao extends AbstractDAO<Category, Integer> implements ICate
         EntityManager em = JPAConfig.getEntityManager();
         String jpql = """
                     SELECT c FROM Category c
-                    JOIN Video v ON c.id = v.category.id
+                    JOIN Product v ON c.id = v.category.id
                     WHERE v.id = :videoId
                 """;
         TypedQuery<Category> query = em.createQuery(jpql, Category.class);

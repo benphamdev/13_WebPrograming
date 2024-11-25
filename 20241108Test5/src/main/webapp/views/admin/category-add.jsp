@@ -5,12 +5,12 @@
     <title>Add Category</title>
 </head>
 <body>
-    <form role="form" action="${pageContext.request.contextPath}/admin/author/insert" method="post"
+    <form role="form" action="${pageContext.request.contextPath}/admin/category/insert" method="post"
           enctype="multipart/form-data">
         <div class="form-group">
             <label>Category name:</label>
             <input class="form-control"
-                   placeholder="Please enter author name" name="categoryName"/>
+                   placeholder="Please enter category name" name="categoryName"/>
         </div>
         <div class="form-group">
             <label>Status: </label>

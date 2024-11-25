@@ -111,10 +111,10 @@
             <form action="${pageContext.request.contextPath}/admin/product" method="get"
                   class="d-flex align-items-center">
                 <select name="sellerId" class="form-select me-2">
-                    <option value="">All UserId</option>
-                    <c:forEach items="${users}" var="user">
-                        <option value="${user.userId}" ${param.userId == user.userId ? 'selected' : ''}>
-                                ${user.username}
+                    <option value="">All categoryId</option>
+                    <c:forEach items="${categories}" var="category">
+                        <option value="${category.categoryId}" ${param.categoryId == category.categoryId ? 'selected' : ''}>
+                                ${category.categoryName}
                         </option>
                     </c:forEach>
                 </select>
@@ -148,7 +148,9 @@
                         <td>$${product.price}</td>
                         <td>
                             <img src="${pageContext.request.contextPath}/uploads/${product.imageLink}"
-                                 alt="${product.productName}" class="img-fluid"/>
+                                 alt="${product.productName}" class="img-fluid"
+                                 style="width: 50px ; height: 50px"
+                            />
                         </td>
                         <td>${product.amount}</td>
                             <%--                        <td>${}</td>--%>
@@ -165,6 +167,13 @@
                                class="btn btn-sm btn-danger"
                                onclick="return confirm('Are you sure you want to delete this product?');">
                                 <i class="fa fa-trash"></i> Delete
+                            </a>
+                            <a
+                                    href="${pageContext.request.contextPath}/comment/add?id=${product.productId}"
+                                    class="btn btn-sm btn-primary"
+                                    onclick="return confirm('Are you sure you want to like this product item?');"
+                            >
+                                <i class="fa fa-share22162006-alt"></i> Like
                             </a>
                         </td>
                     </tr>

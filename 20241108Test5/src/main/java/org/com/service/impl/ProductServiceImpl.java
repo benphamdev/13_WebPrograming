@@ -90,4 +90,19 @@ public class ProductServiceImpl implements IProductService {
     public int countBySellerId(Long sellerId) {
         return videoDao.countBySellerId(sellerId);
     }
+
+    @Override
+    public List<Product> getTop10BestSellers() {
+        return videoDao.getTop10BestSellers();
+    }
+
+    @Override
+    public List<Product> getTop10MostViewed() {
+        return videoDao.getTop10MostViewed();
+    }
+
+    @Override
+    public List<Product> getTop10MostLiked() {
+        return videoDao.getTop10MostLiked();
+    }
 }

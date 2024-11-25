@@ -9,15 +9,15 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
-    <title>Category ${author.categoryId}</title>
+    <title>Category ${category.categoryId}</title>
 </head>
 <body>
     <a href="<c:url value="/admin/categories"/>">Back to Category list</a>
-    <h4>Category ID: ${author.categoryId}</h4>
-    <h4>Category name: ${author.categoryName }</h4>
-    <c:set var="imgUrl" value="${author.image}"/>
-    <c:if test="${author.image.length() >= 5 && !author.image.substring(0, 5).equals('https')}">
-        <c:url value="/image?filename=${author.image}" var="imgUrl"></c:url>
+    <h4>Category ID: ${category.categoryId}</h4>
+    <h4>Category name: ${category.categoryName }</h4>
+    <c:set var="imgUrl" value="${category.image}"/>
+    <c:if test="${category.image.length() >= 5 && !category.image.substring(0, 5).equals('https')}">
+        <c:url value="/image?filename=${category.image}" var="imgUrl"></c:url>
     </c:if>
     <h4>Image:</h4>
     <img height="150" width="200" src="${imgUrl}"/>
@@ -25,7 +25,7 @@
         Status:
         <!-- Hiển thị trạng thái dựa trên giá trị status -->
         <c:choose>
-            <c:when test="${author.status == 1}">
+            <c:when test="${category.status == 1}">
                 Active
             </c:when>
             <c:otherwise>
@@ -33,8 +33,8 @@
             </c:otherwise>
         </c:choose>
     </h4>
-    <h4>Video of this author: </h4>
-    <a href="<c:url value="/admin/video/add?categoryId=${author.categoryId}"/>">Add more video for this author</a>
+    <h4>Video of this category: </h4>
+    <a href="<c:url value="/admin/video/add?categoryId=${category.categoryId}"/>">Add more video for this category</a>
     <table border="1">
         <tr>
             <th style="text-align: center;">ID</th>
@@ -43,7 +43,7 @@
             <th style="text-align: center;">Active</th>
             <th style="text-align: center;">Action</th>
         </tr>
-        <c:forEach items="${author.videos}" var="video" varStatus="STT">
+        <c:forEach items="${category.videos}" var="video" varStatus="STT">
             <tr class="odd gradeX">
                 <td width="50" style="text-align: center;">${video.videoId}</td>
                 <c:set var="imgUrl" value="${video.poster}"/>

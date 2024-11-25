@@ -92,7 +92,8 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-4 text-center poster">
-                <img src="${pageContext.request.contextPath}/uploads/${product.imageLink}" alt="${product.productName}">
+                <img src="${pageContext.request.contextPath}/uploads/${product.imageLink}" alt="${product.productName}"
+                     style="height: 50px;width: 50px">
             </div>
             <div class="col-md-8 details">
                 <h4>Product Name: ${product.productName}</h4>
@@ -101,6 +102,8 @@
                 <h5>Price: $${product.price}</h5>
                 <h5>Amount in Stock: ${product.amount}</h5>
                 <h5>Seller: ${seller.userId}</h5>
+                <h5>Like: ${like}</h5>
+
             </div>
         </div>
         <div class="description">

@@ -6,6 +6,8 @@
         <class>org.com.entity.User</class>
         <class>org.com.entity.Category</class>
         <class>org.com.entity.Cart</class>
+        <class>org.com.entity.Comment</class>
+        <class>org.com.entity.ProductImage</class>
         <class>org.com.entity.Product</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

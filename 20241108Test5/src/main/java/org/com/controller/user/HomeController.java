@@ -10,7 +10,7 @@ import org.com.util.Constant;
 
 import java.io.IOException;
 
-@WebServlet("/user/home")
+@WebServlet("/web/home")
 public class HomeController extends HttpServlet {
     @Override
     protected void doGet(

@@ -161,4 +161,48 @@ public class ProductDao extends AbstractDAO<Product, Long> implements IProductDa
         query.setParameter("sellerId", sellerId);
         return ((Long) query.getSingleResult()).intValue();
     }
+
+    @Override
+    public List<Product> getTop10BestSellers() {
+        EntityManager enma = JPAConfig.getEntityManager();
+        try {
+            String jpql = "SELECT p FROM Product p ORDER BY p.nSold DESC";
+            TypedQuery<Product> query = enma.createQuery(jpql, Product.class);
+            query.setMaxResults(10); // Lấy 10 sản phẩm
+            return query.getResultList();
+        } finally {
+            enma.close();
+        }
+    }
+
+    @Override
+    public List<Product> getTop10MostViewed() {
+        EntityManager enma = JPAConfig.getEntityManager();
+        try {
+            String jpql = "SELECT p FROM Product p ORDER BY p.nVisit DESC";
+            TypedQuery<Product> query = enma.createQuery(jpql, Product.class);
+            query.setMaxResults(10); // Lấy 10 sản phẩm
+            return query.getResultList();
+        } finally {
+            enma.close();
+        }
+    }
+
+    @Override
+    public List<Product> getTop10MostLiked() {
+        EntityManager enma = JPAConfig.getEntityManager();
+        try {
+            String jpql = """
+                    SELECT p FROM Product p
+                    JOIN p.comments c
+                    GROUP BY p.id
+                    ORDER BY SUM(c.rating) DESC
+                    """;
+            TypedQuery<Product> query = enma.createQuery(jpql, Product.class);
+            query.setMaxResults(10); // Lấy 10 sản phẩm
+            return query.getResultList();
+        } finally {
+            enma.close();
+        }
+    }
 }

@@ -27,6 +27,8 @@ public class Category implements Serializable {
 
     private String icon;
 
+    private Boolean isActive;
+    
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> products;
 }

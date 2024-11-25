@@ -37,4 +37,13 @@ public interface IProductDao extends GenericDAO<Product, Long> {
     List<Product> findBySellerId(Long sellerId);
 
     int countBySellerId(Long sellerId);
+
+    // Lấy 10 sản phẩm bán chạy nhất
+    List<Product> getTop10BestSellers();
+
+    // Lấy 10 sản phẩm được xem nhiều nhất
+    List<Product> getTop10MostViewed();
+
+    // Lấy 10 sản phẩm được yêu thích nhất (dựa trên tổng rating)
+    List<Product> getTop10MostLiked();
 }

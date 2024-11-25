@@ -11,9 +11,11 @@ import org.com.entity.Category;
 import org.com.entity.Product;
 import org.com.entity.User;
 import org.com.service.ICategoryService;
+import org.com.service.ICommentService;
 import org.com.service.IProductService;
 import org.com.service.IUserService;
 import org.com.service.impl.CategoryServiceImpl;
+import org.com.service.impl.CommentServiceServiceImpl;
 import org.com.service.impl.ProductServiceImpl;
 import org.com.service.impl.UserServiceImpl;
 
@@ -39,6 +41,7 @@ public class ProductController extends HttpServlet {
     private final IProductService productService = new ProductServiceImpl();
     private final ICategoryService categoryService = new CategoryServiceImpl();
     private final IUserService userService = new UserServiceImpl();
+    private final ICommentService commentService = new CommentServiceServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,17 +73,19 @@ public class ProductController extends HttpServlet {
 //    }
 
     private void listProducts(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String sellerIdParam = req.getParameter("sellerId");
+        String sellerIdParam = req.getParameter("categoryId");
         Integer sellerId = sellerIdParam != null && !sellerIdParam.isEmpty() ? Integer.parseInt(sellerIdParam) : null;
         int page = Optional.ofNullable(req.getParameter("page")).map(Integer::parseInt).orElse(1);
         int pageSize = Optional.ofNullable(req.getParameter("size")).map(Integer::parseInt).orElse(3);
-        List<User> users = userService.getAllUsers();
+        List<Category> categories = categoryService.findAll();
 
         List<Product> productList;
         int totalItems;
+
         if (sellerId != null) {
-            productList = productService.findBySellerId(Long.valueOf(sellerId));
+            productList = productService.findByCategoryId(sellerId, 1, 10);
             totalItems = productService.countBySellerId(Long.valueOf(sellerId));
+
             req.setAttribute("sellerId", sellerId);
 
         } else {
@@ -94,7 +99,7 @@ public class ProductController extends HttpServlet {
         req.setAttribute("totalPages", totalPages);
         req.setAttribute("totalProduct", totalItems);
         req.setAttribute("pageSize", pageSize);
-        req.setAttribute("users", users);
+        req.setAttribute("categories", categories);
 
         req.getRequestDispatcher("/views/admin/product-list.jsp").forward(req, resp);
     }
@@ -125,13 +130,14 @@ public class ProductController extends HttpServlet {
         String productId = req.getParameter("id");
 
         Product product = productService.findById(productId);
-
+//        long like = commentService.countLikesByProductId(Long.valueOf(productId));
         if (product == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Product not found");
             return;
         }
 
         req.setAttribute("product", product);
+//        req.setAttribute("like", like);
         req.getRequestDispatcher("/views/admin/product-details.jsp").forward(req, resp);
     }
 
